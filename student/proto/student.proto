@@ -1,0 +1,20 @@
+syntax ="proto3";
+
+package student;
+
+option go_package = "github.com/MahbubAhmedTonmoy/GoGrpc/student/proto";
+
+message StudentRequest {
+    string name = 1;
+}
+message StudentResult {
+    string result = 1;
+}
+
+service StudentService{
+    rpc Student (StudentRequest) returns (StudentResult);
+    rpc StudentManyTime (StudentRequest) returns (stream StudentResult); // server streaming
+    rpc LongStudent (stream StudentRequest) returns (StudentResult); //client streaming
+    rpc StudentEveryWhere(stream StudentRequest) returns (stream StudentResult); //bidirectional
+    rpc StudentDeadLine (StudentRequest) returns (StudentResult);
+}

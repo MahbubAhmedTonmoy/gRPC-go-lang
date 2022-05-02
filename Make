@@ -1,0 +1,28 @@
+$ go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+$ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+
+check version protoc --version
+
+protoc -Istudent/proto --go_out=. --go_opt=module=github.com/MahbubAhmedTonmoy/GoGrpc --go-grpc_out=. --go-grpc_opt=module=github.com/MahbubAhmedTonmoy/GoGrpc student/proto/student.proto
+
+
+protoc -Istudent/proto --go_opt=module=github.com/MahbubAhmedTonmoy/GoGrpc --go_out=. --go-grpc_opt=module=github.com/MahbubAhmedTonmoy/GoGrpc --go-grpc_out=. student/proto/*.proto
+
+go build -o bin/student/server ./student/server
+go build -o bin/student/client ./student/client
+
+protoc -Icalculator/proto --go_opt=module=github.com/MahbubAhmedTonmoy/GoGrpc --go_out=. --go-grpc_opt=module=github.com/MahbubAhmedTonmoy/GoGrpc --go-grpc_out=. calculator/proto/*.proto
+
+go build -o bin/calculator/server ./calculator/server
+go build -o bin/calculator/client ./calculator/client
+
+ssl
+chmod +x ssl.sh
+./ssl.sh 
+
+
+go get go.mongodb.org/mongo-driver/mongo
+
+protoc -Imovie/proto --go_opt=module=github.com/MahbubAhmedTonmoy/GoGrpc --go_out=. --go-grpc_opt=module=github.com/MahbubAhmedTonmoy/GoGrpc --go-grpc_out=. movie/proto/*.proto
+go build -o bin/movie/server ./movie/server
+go build -o bin/movie/client ./movie/client

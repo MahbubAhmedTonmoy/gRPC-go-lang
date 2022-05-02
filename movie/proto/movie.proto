@@ -1,0 +1,25 @@
+syntax ="proto3";
+
+package movie;
+
+option go_package = "github.com/MahbubAhmedTonmoy/GoGrpc/movie/proto";
+
+import "google/protobuf/empty.proto";
+
+message Movie{
+    string id = 1;
+    string producer_id = 2;
+    string title = 3;
+    string content = 4;
+}
+message MovieId{
+    string id = 1;
+}
+
+service MovieService{
+    rpc CreateMovie(Movie) returns (MovieId);
+    rpc GetMovie(MovieId) returns (Movie);
+    rpc UpdateMovie(Movie) returns (google.protobuf.Empty);
+    rpc DeleteMovie(MovieId) returns (google.protobuf.Empty);
+    rpc ListMovie(google.protobuf.Empty) returns (stream Movie);
+}
